@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technote – UI Mockups: Workspace Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0d14;
+    color: #E8EAF0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    text-align: center;
+    color: #9BA3B8;
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .screen-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9BA3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .phone {
+    width: 360px;
+    height: 740px;
+    background: #1A1D27;
+    border-radius: 36px;
+    border: 2px solid #252836;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+  .status-bar {
+    height: 36px;
+    background: #0F1117;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 11px;
+    color: #9BA3B8;
+  }
+  .screen-content {
+    height: calc(100% - 36px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    background: linear-gradient(180deg, #0F1117 0%, #0D1520 55%, #0F1117 100%);
+    padding: 20px 20px 84px;
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+  .top-row { display: flex; align-items: center; justify-content: space-between; }
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    color: white;
+    font-size: 14px;
+  }
+  .search {
+    margin-top: 14px;
+    background: #252836;
+    border: 1px solid #2E3243;
+    border-radius: 14px;
+    padding: 12px 14px;
+    color: #5C6480;
+    font-size: 13px;
+  }
+  .hero {
+    margin-top: 16px;
+    background: linear-gradient(135deg, rgba(26,115,232,0.24), rgba(0,188,212,0.16));
+    border: 1px solid rgba(26,115,232,0.35);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .hero h2 { font-size: 18px; font-weight: 700; color: #E8EAF0; }
+  .hero p { font-size: 12px; color: #C0C6D8; margin-top: 6px; line-height: 1.4; }
+  .quick-actions {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .action {
+    border-radius: 12px;
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #E8EAF0;
+    font-weight: 500;
+  }
+  .section { margin-top: 18px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .section-title { font-size: 15px; font-weight: 700; color: #E8EAF0; }
+  .section-link { font-size: 12px; color: #1A73E8; }
+  .card {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .card-title { font-size: 14px; font-weight: 600; color: #E8EAF0; }
+  .card-subtitle { font-size: 12px; color: #9BA3B8; margin-top: 4px; }
+  .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .chip {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(26,115,232,0.15);
+    color: #4A9EF7;
+  }
+  .bottom-nav {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    background: rgba(30,33,48,0.96);
+    border: 1px solid #2A2F42;
+    border-radius: 18px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px;
+    text-align: center;
+    font-size: 11px;
+    color: #9BA3B8;
+  }
+  .bottom-nav .active { color: #1A73E8; font-weight: 700; }
+  .legend {
+    text-align: center;
+    margin-top: 32px;
+    color: #5C6480;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<h1>Technote — UI Mockups</h1>
+<p class="subtitle">Page 2: Workspace Dashboard &nbsp;·&nbsp; Post-auth landing experience</p>
+
+<div class="screen-wrapper">
+  <div class="screen-label">Dashboard Screen</div>
+
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>📶 🔋</span>
+    </div>
+
+    <div class="screen-content">
+      <div class="top-row">
+        <div>
+          <div style="font-size:12px;color:#9BA3B8;">Welcome back,</div>
+          <div style="font-size:20px;font-weight:800;color:#E8EAF0;">Alex 👋</div>
+        </div>
+        <div class="avatar">AT</div>
+      </div>
+
+      <div class="search">🔎 Search notes, projects, chats...</div>
+
+      <div class="hero">
+        <h2>Your AI Workspace</h2>
+        <p>Jump into your latest context, continue active agent sessions, and keep every note linked to your project goals.</p>
+      </div>
+
+      <div class="quick-actions">
+        <div class="action">✨ New AI Note</div>
+        <div class="action">🤖 Launch Agent</div>
+        <div class="action">📁 Open Projects</div>
+        <div class="action">🔗 Connect GitHub</div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Recent Workspaces</div>
+          <div class="section-link">View all</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Technote Android MVP</div>
+          <div class="card-subtitle">Last opened 45m ago · 12 linked notes</div>
+          <div class="chips">
+            <span class="chip">Compose UI</span>
+            <span class="chip">Auth Flow</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Prompt Library</div>
+          <div class="card-subtitle">Last opened yesterday · 42 prompts</div>
+          <div class="chips">
+            <span class="chip">Templates</span>
+            <span class="chip">Ideas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Agent Activity</div>
+          <div class="section-link">Details</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">UI Assistant — In Progress</div>
+          <div class="card-subtitle">Generating layout suggestions for page 2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="active">Home</div>
+      <div>Notes</div>
+      <div>Agents</div>
+      <div>Profile</div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <p>🎨 Keeps page-1 dark + gradient visual language</p>
+  <p>🧠 Prioritizes recent work, AI actions, and project continuity</p>
+</div>
+
+</body>
+</html>
