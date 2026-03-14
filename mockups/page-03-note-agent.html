@@ -88,9 +88,30 @@
     justify-content: space-between;
     gap: 12px;
   }
-  .crumbs { color: #9BA3B8; font-size: 12px; }
+  .crumbs {
+    color: #9BA3B8;
+    font-size: 12px;
+  }
+  .crumbs ol {
+    list-style: none;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+  }
+  .crumbs li {
+    display: flex;
+    align-items: center;
+  }
+  .crumbs li:not(:last-child)::after {
+    content: ' / ';
+    color: #6B7390;
+    margin-left: 4px;
+  }
   .toolbar-actions { display: flex; gap: 10px; align-items: center; }
   .icon-btn {
+    padding: 0;
     width: 34px;
     height: 34px;
     border-radius: 12px;
@@ -100,6 +121,7 @@
     place-items: center;
     color: #9BA3B8;
     font-size: 13px;
+    cursor: pointer;
   }
   .title {
     font-size: 22px;
@@ -242,9 +264,18 @@
     font-size: 13px;
     font-weight: 700;
     text-align: center;
+    cursor: pointer;
   }
   .page-nav { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: #252836; }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #252836;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
   .dot-active { background: #1A73E8; width: 20px; border-radius: 4px; }
   .legend {
     text-align: center;
@@ -273,11 +304,17 @@
       <div class="glow glow-blue"></div>
       <div class="content-padding">
         <div class="toolbar">
-          <div class="crumbs">Workspace / Prompt Library / Edge Detection Guide</div>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li>Workspace</li>
+              <li>Prompt Library</li>
+              <li aria-current="page">Edge Detection Guide</li>
+            </ol>
+          </nav>
           <div class="toolbar-actions">
-            <div class="icon-btn">★</div>
-            <div class="icon-btn">☁</div>
-            <div class="icon-btn">⋮</div>
+            <button class="icon-btn" type="button" aria-label="Add to favorites">★</button>
+            <button class="icon-btn" type="button" aria-label="Sync to cloud">☁</button>
+            <button class="icon-btn" type="button" aria-label="More options">⋮</button>
           </div>
         </div>
 
@@ -316,7 +353,7 @@
                 <span class="status">In progress</span>
               </div>
               <div class="task">
-                <span class="label">Link to Github issue #42</span>
+                <span class="label">Link to GitHub issue #42</span>
                 <span class="status" style="color:#5ed7e6;">Linked</span>
               </div>
               <div class="task">
@@ -338,7 +375,7 @@
             <div class="chat">
               <div class="chat-bubble chat-user">Can you propose a Compose preview that toggles filter intensity?</div>
               <div class="chat-bubble chat-agent">Drafting preview function with sliders + sample bitmap. Will avoid blocking main thread.</div>
-              <div class="chat-bubble chat-agent">Also prepping PR checklist for Github sync.</div>
+              <div class="chat-bubble chat-agent">Also prepping PR checklist for GitHub sync.</div>
             </div>
             <div class="agent-badge">🤝 Agent is watching file changes and tests</div>
           </div>
@@ -348,12 +385,12 @@
 
     <div class="bottom-row">
       <div class="compose">Type to steer the agent or add note content…</div>
-      <div class="primary-btn">Send update · Cmd + Enter</div>
-      <div class="page-nav">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot dot-active"></div>
-      </div>
+      <button class="primary-btn" type="button">Send update · Cmd + Enter</button>
+      <nav class="page-nav" aria-label="Page navigation">
+        <button class="dot" type="button" aria-label="Page 1"></button>
+        <button class="dot" type="button" aria-label="Page 2"></button>
+        <button class="dot dot-active" type="button" aria-label="Page 3" aria-current="page"></button>
+      </nav>
     </div>
   </div>
 </div>
