@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technote – UI Mockups: Multi-Agent Planner</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0d14;
+    color: #E8EAF0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    text-align: center;
+    color: #9BA3B8;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .screen-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9BA3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .phone {
+    width: 360px;
+    height: 740px;
+    background: #1A1D27;
+    border-radius: 36px;
+    border: 2px solid #252836;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+  .status-bar {
+    height: 36px;
+    background: #0F1117;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 11px;
+    color: #9BA3B8;
+  }
+  .screen-content {
+    height: calc(100% - 36px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    background: linear-gradient(180deg, #0F1117 0%, #0D1520 55%, #0F1117 100%);
+    padding: 18px 18px 88px;
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+  .hero {
+    background: linear-gradient(135deg, rgba(26,115,232,0.24), rgba(0,188,212,0.16));
+    border: 1px solid rgba(26,115,232,0.35);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .hero h2 { font-size: 18px; font-weight: 700; color: #E8EAF0; }
+  .hero p { font-size: 12px; color: #C0C6D8; margin-top: 6px; line-height: 1.5; }
+  .chip-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #C0C6D8;
+  }
+  .chip-blue { background: rgba(26,115,232,0.15); border-color: rgba(26,115,232,0.4); color: #90C2FF; }
+  .chip-green { background: rgba(0,200,160,0.16); border-color: rgba(0,200,160,0.4); color: #7AEBD5; }
+  .chip-yellow { background: rgba(255,193,7,0.12); border-color: rgba(255,193,7,0.35); color: #FFD166; }
+  .chip-orange { background: rgba(255,132,0,0.12); border-color: rgba(255,132,0,0.35); color: #FFB47D; }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .metric-card {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 12px;
+    padding: 10px;
+  }
+  .metric-label { font-size: 11px; color: #9BA3B8; }
+  .metric-value { font-size: 17px; font-weight: 800; color: #E8EAF0; margin-top: 4px; }
+  .metric-sub { font-size: 11px; color: #5C6480; margin-top: 4px; }
+  .section { margin-top: 16px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .section-title { font-size: 15px; font-weight: 700; color: #E8EAF0; }
+  .section-link { font-size: 12px; color: #1A73E8; }
+  .card {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  .card-title { font-size: 14px; font-weight: 700; color: #E8EAF0; }
+  .card-subtitle { font-size: 12px; color: #9BA3B8; margin-top: 4px; line-height: 1.5; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+  .btn {
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    color: #E8EAF0;
+    background: #252836;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    color: white;
+    box-shadow: 0 10px 30px rgba(26,115,232,0.28);
+  }
+  .btn-ghost { border: 1px solid #2A2F42; }
+  .status { font-size: 11px; font-weight: 700; padding: 6px 10px; border-radius: 999px; }
+  .status-done { background: rgba(0,200,160,0.16); color: #7AEBD5; border: 1px solid rgba(0,200,160,0.35); }
+  .status-review { background: rgba(255,193,7,0.12); color: #FFD166; border: 1px solid rgba(255,193,7,0.35); }
+  .status-build { background: rgba(26,115,232,0.15); color: #90C2FF; border: 1px solid rgba(26,115,232,0.35); }
+  .status-wait { background: rgba(255,132,0,0.12); color: #FFB47D; border: 1px solid rgba(255,132,0,0.35); }
+  .activity {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .activity-item {
+    padding: 10px;
+    border-radius: 12px;
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+  }
+  .activity-title { font-size: 13px; font-weight: 700; color: #E8EAF0; }
+  .activity-meta { font-size: 11px; color: #5C6480; margin-top: 4px; }
+  .bottom-nav {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .pill-nav {
+    padding: 10px;
+    border-radius: 12px;
+    background: #252836;
+    border: 1px solid #2A2F42;
+    text-align: center;
+    font-size: 12px;
+    color: #9BA3B8;
+  }
+  .pill-nav.active { background: linear-gradient(135deg, #1A73E8, #00BCD4); color: white; border: none; }
+  .page-nav { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #252836; }
+  .dot-active { background: #1A73E8; width: 20px; border-radius: 4px; }
+  .legend {
+    text-align: center;
+    margin-top: 32px;
+    color: #5C6480;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<h1>Technote — UI Mockups</h1>
+<p class="subtitle">Page 3: Multi-Agent Instance · Agent-per-page builder + approvals</p>
+
+<div class="screen-wrapper">
+  <div class="screen-label">Agent Planner</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>📶 🔋</span>
+    </div>
+
+    <div class="screen-content">
+      <div class="hero">
+        <h2>Multi-agent instance is live</h2>
+        <p>Each page has a dedicated agent creating UI + logic. Approve page-by-page to ship safely.</p>
+        <div class="chip-row">
+          <span class="chip chip-blue">4 agents online</span>
+          <span class="chip chip-green">2 pages ready</span>
+          <span class="chip chip-yellow">1 approval pending</span>
+        </div>
+        <div class="metrics">
+          <div class="metric-card">
+            <div class="metric-label">Builds running</div>
+            <div class="metric-value">3</div>
+            <div class="metric-sub">Realtime</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Queue</div>
+            <div class="metric-value">2</div>
+            <div class="metric-sub">Next pages</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Reviews</div>
+            <div class="metric-value">1</div>
+            <div class="metric-sub">Needs approval</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Agent per page</div>
+          <div class="section-link">View full roster</div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Page 1 — Authentication</div>
+              <div class="card-subtitle">Auth agent (Ava) finalized flows</div>
+            </div>
+            <span class="status status-done">Done</span>
+          </div>
+          <div class="row">
+            <div class="chip chip-green">✅ Ready</div>
+            <button class="btn btn-primary">Approve</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Page 2 — Workspace Dashboard</div>
+              <div class="card-subtitle">UI agent (Nova) proposing quick actions</div>
+            </div>
+            <span class="status status-review">Review</span>
+          </div>
+          <div class="row">
+            <div class="chip chip-yellow">⏳ Awaiting feedback</div>
+            <div class="row" style="gap:6px">
+              <button class="btn btn-ghost">Request changes</button>
+              <button class="btn btn-primary">Approve</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Page 3 — Notes + Agents</div>
+              <div class="card-subtitle">Systems agent (Iris) stitching note detail + agent panel</div>
+            </div>
+            <span class="status status-build">Building</span>
+          </div>
+          <div class="row">
+            <div class="chip chip-blue">🚧 In progress</div>
+            <div class="chip chip-blue">ETA 12m</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Page 4 — Knowledge base</div>
+              <div class="card-subtitle">Research agent (Kite) prepping taxonomy + search</div>
+            </div>
+            <span class="status status-wait">Queued</span>
+          </div>
+          <div class="row">
+            <div class="chip chip-orange">🔁 Up next</div>
+            <button class="btn btn-ghost">Assign reviewer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Approval queue</div>
+          <div class="section-link">Auto-approve rules</div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Workspace dashboard</div>
+              <div class="card-subtitle">Snapshot ready · synced to branch <strong>ui/page-02</strong></div>
+            </div>
+            <button class="btn btn-primary">Approve & merge</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Authentication</div>
+              <div class="card-subtitle">Approved · ready to release with other pages</div>
+            </div>
+            <span class="chip chip-green">Ready</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Live activity</div>
+          <div class="section-link">View logs</div>
+        </div>
+        <div class="activity">
+          <div class="activity-item">
+            <div class="activity-title">Nova updated hero CTA on Page 2</div>
+            <div class="activity-meta">2m ago · diff preview attached</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-title">Iris requested schema for Note detail</div>
+            <div class="activity-meta">8m ago · waiting on spec</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-title">Kite queued data sources for Knowledge base</div>
+            <div class="activity-meta">12m ago · will start after Page 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="pill-nav">Home</div>
+      <div class="pill-nav">Notes</div>
+      <div class="pill-nav active">Agents</div>
+      <div class="pill-nav">Profile</div>
+    </div>
+  </div>
+  <div class="page-nav">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot dot-active"></div>
+  </div>
+</div>
+
+<div class="legend">
+  <p>🧠 Multi-agent instance: dedicated agent per page with approval gates</p>
+  <p>✅ Ready to approve Pages 1–2 · 🚧 Building Page 3 · 🔁 Queueing Page 4</p>
+  <p style="margin-top:8px">Previous: Page 2 → Workspace Dashboard</p>
+</div>
+
+</body>
+</html>
