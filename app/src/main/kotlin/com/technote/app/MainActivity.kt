@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.technote.app.ui.agents.AgentPlannerScreen
 import com.technote.app.ui.auth.AuthDestination
 import com.technote.app.ui.auth.LoginScreen
 import com.technote.app.ui.auth.SignUpScreen
@@ -39,7 +41,7 @@ fun TechnoteApp() {
                     navController.navigate(AuthDestination.SignUp.route)
                 },
                 onLoginSuccess = {
-                    // Navigate to dashboard (to be implemented)
+                    navController.navigateToAgentPlanner()
                 }
             )
         }
@@ -49,9 +51,22 @@ fun TechnoteApp() {
                     navController.popBackStack()
                 },
                 onSignUpSuccess = {
-                    // Navigate to dashboard (to be implemented)
+                    navController.navigateToAgentPlanner()
                 }
             )
         }
+        composable(AgentDestination.AgentPlanner.route) {
+            AgentPlannerScreen()
+        }
+    }
+}
+
+private sealed class AgentDestination(val route: String) {
+    data object AgentPlanner : AgentDestination("agents")
+}
+
+private fun NavHostController.navigateToAgentPlanner() {
+    navigate(AgentDestination.AgentPlanner.route) {
+        popUpTo(AuthDestination.Login.route) { inclusive = true }
     }
 }
