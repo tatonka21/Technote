@@ -1,5 +1,5 @@
 # Technote
-This is an ai note app,  a knowledge base, a app builder chat agent with github integratioms, monoco, previews for builds, an more
+This is an ai note app, a knowledge base, a app builder chat agent with github integrations, monaco, previews for builds, and more
 
 Mockups:
 - Page 1 — Authentication (dark theme login / sign up)
