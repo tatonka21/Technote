@@ -229,7 +229,7 @@ private fun PageStatusCards() {
         chips = listOf(StatusChip("✅ Ready", Color(0xFF1E2A24), Color(0xFF7AEBD5))),
         actions = {
             Button(
-                onClick = {},
+                onClick = { /* TODO: connect approval action */ },
                 modifier = Modifier.height(44.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = TechnoteBlue)
             ) {
@@ -246,7 +246,7 @@ private fun PageStatusCards() {
         actions = {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(
-                    onClick = {},
+                    onClick = { /* TODO: request changes */ },
                     modifier = Modifier.height(44.dp),
                     border = BorderStroke(1.dp, SurfaceVariantDark),
                     colors = ButtonDefaults.outlinedButtonColors(
@@ -257,7 +257,7 @@ private fun PageStatusCards() {
                     Text("Request changes")
                 }
                 Button(
-                    onClick = {},
+                    onClick = { /* TODO: approve proposed page */ },
                     modifier = Modifier.height(44.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = TechnoteBlue)
                 ) {
@@ -284,7 +284,7 @@ private fun PageStatusCards() {
         chips = listOf(StatusChip("🔁 Up next", Color(0xFF2F251A), Color(0xFFFFB47D))),
         actions = {
             OutlinedButton(
-                onClick = {},
+                onClick = { /* TODO: assign reviewer */ },
                 modifier = Modifier.height(44.dp),
                 border = BorderStroke(1.dp, SurfaceVariantDark),
                 colors = ButtonDefaults.outlinedButtonColors(
@@ -307,7 +307,7 @@ private fun ApprovalQueueCards() {
         chips = emptyList(),
         actions = {
             Button(
-                onClick = {},
+                onClick = { /* TODO: approve and merge */ },
                 modifier = Modifier.height(44.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = TechnoteBlue)
             ) {
