@@ -98,6 +98,10 @@ fun AgentPlannerScreen() {
             PageStatusCards()
 
             Spacer(modifier = Modifier.height(8.dp))
+            SectionHeader(title = "Remaining pages (parallel spin-up)", action = "Start all")
+            RemainingPagesParallel()
+
+            Spacer(modifier = Modifier.height(8.dp))
             SectionHeader(title = "Approval queue", action = "Auto-approve rules")
             ApprovalQueueCards()
 
@@ -296,6 +300,48 @@ private fun PageStatusCards() {
             }
         }
     )
+}
+
+@Composable
+private fun RemainingPagesParallel() {
+    val remaining = listOf(
+        Triple("Page 5 — Settings", "Auto-assigning copilot agent to layout preferences", "Spinning"),
+        Triple("Page 6 — Notifications", "Parallel build for alerts + delivery rules", "Queued"),
+        Triple("Page 7 — Billing", "Preparing pricing components and receipts", "Queued")
+    )
+
+    remaining.forEach { (title, subtitle, status) ->
+        val pill = when (status) {
+            "Spinning" -> StatusPill(
+                label = "Spinning up",
+                background = TechnoteBlue.copy(alpha = 0.15f),
+                content = Color(0xFF90C2FF)
+            )
+            else -> StatusPill(
+                label = "Queued",
+                background = Color(0xFF2F251A),
+                content = Color(0xFFFFB47D)
+            )
+        }
+
+        StatusCard(
+            title = title,
+            subtitle = subtitle,
+            status = pill,
+            chips = listOf(StatusChip("Running in parallel", TechnoteBlue.copy(alpha = 0.12f), Color(0xFF90C2FF))),
+            actions = {
+                Button(
+                    onClick = { /* TODO: start agent build */ },
+                    modifier = Modifier.height(44.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = TechnoteBlue)
+                ) {
+                    Text("Spawn agent")
+                }
+            }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+    }
 }
 
 @Composable
