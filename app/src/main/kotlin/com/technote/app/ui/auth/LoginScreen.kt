@@ -72,6 +72,7 @@ import com.technote.app.ui.theme.TextSecondary
 @Composable
 fun LoginScreen(
     onNavigateToSignUp: () -> Unit = {},
+    onNavigateToGitHubDeviceFlow: () -> Unit = {},
     onLoginSuccess: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
@@ -385,7 +386,8 @@ fun LoginScreen(
                         )
                         SocialLoginButton(
                             label = "GitHub",
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f),
+                            onClick = onNavigateToGitHubDeviceFlow
                         )
                     }
                 }
@@ -420,14 +422,15 @@ fun LoginScreen(
 @Composable
 private fun SocialLoginButton(
     label: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
             .height(46.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(SurfaceVariantDark)
-            .clickable { /* Social login */ }
+            .clickable { onClick() }
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center
     ) {
