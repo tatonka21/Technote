@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technote – UI Mockups: GitHub Integration</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0d14;
+    color: #E8EAF0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    text-align: center;
+    color: #9BA3B8;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .screen-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9BA3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .phone {
+    width: 360px;
+    height: 740px;
+    background: #1A1D27;
+    border-radius: 36px;
+    border: 2px solid #252836;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+  .status-bar {
+    height: 36px;
+    background: #0F1117;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 11px;
+    color: #9BA3B8;
+  }
+  .screen-content {
+    height: calc(100% - 36px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    background: linear-gradient(180deg, #0F1117 0%, #0D1520 55%, #0F1117 100%);
+    padding: 14px 16px 88px;
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+
+  /* Top bar */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .page-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #E8EAF0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+  }
+
+  /* Connected account banner */
+  .connected-banner {
+    background: linear-gradient(135deg, rgba(0,200,160,0.14), rgba(0,188,212,0.10));
+    border: 1px solid rgba(0,200,160,0.28);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .gh-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #252836;
+    border: 2px solid rgba(0,200,160,0.3);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .gh-name { font-size: 13px; font-weight: 700; color: #E8EAF0; }
+  .gh-sub { font-size: 11px; color: #5C6480; margin-top: 2px; }
+  .connected-badge {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(0,200,160,0.18);
+    border: 1px solid rgba(0,200,160,0.35);
+    color: #00C8A0;
+    flex-shrink: 0;
+  }
+
+  /* Section */
+  .section { margin-bottom: 14px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .section-title { font-size: 14px; font-weight: 700; color: #E8EAF0; }
+  .section-link { font-size: 12px; color: #1A73E8; }
+
+  /* Repo cards */
+  .repo-card {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 13px;
+    padding: 11px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .repo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #252836;
+    border: 1px solid #2A2F42;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .repo-name { font-size: 13px; font-weight: 600; color: #E8EAF0; }
+  .repo-sub { font-size: 11px; color: #5C6480; margin-top: 2px; }
+  .repo-badge {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .repo-badge.linked {
+    background: rgba(26,115,232,0.15);
+    border: 1px solid rgba(26,115,232,0.3);
+    color: #90C2FF;
+  }
+  .repo-badge.unlinked {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    color: #5C6480;
+  }
+
+  /* Activity items */
+  .activity-item {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 13px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .activity-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .activity-icon.commit { background: rgba(26,115,232,0.18); }
+  .activity-icon.pr { background: rgba(139,92,246,0.18); }
+  .activity-icon.issue { background: rgba(251,191,36,0.15); }
+  .activity-title { font-size: 12px; font-weight: 600; color: #E8EAF0; }
+  .activity-sub { font-size: 11px; color: #5C6480; margin-top: 2px; }
+  .activity-time { font-size: 10px; color: #5C6480; margin-top: 4px; }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stat-card {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 13px;
+    padding: 10px;
+    text-align: center;
+  }
+  .stat-val { font-size: 20px; font-weight: 800; color: #E8EAF0; }
+  .stat-label { font-size: 10px; color: #5C6480; margin-top: 3px; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .pill-nav {
+    padding: 10px;
+    border-radius: 12px;
+    background: #252836;
+    border: 1px solid #2A2F42;
+    text-align: center;
+    font-size: 12px;
+    color: #9BA3B8;
+  }
+  .pill-nav.active { background: linear-gradient(135deg, #1A73E8, #00BCD4); color: white; border: none; }
+
+  /* Page dots */
+  .page-nav { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #252836; }
+  .dot-active { background: #1A73E8; width: 20px; border-radius: 4px; }
+
+  /* Legend */
+  .legend {
+    text-align: center;
+    margin-top: 32px;
+    color: #5C6480;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<h1>Technote — UI Mockups</h1>
+<p class="subtitle">Page 7: GitHub Integration · Connected repos, activity feed & PR/issue tracking</p>
+
+<div class="screen-wrapper">
+  <div class="screen-label">GitHub Integration</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>📶 🔋</span>
+    </div>
+
+    <div class="screen-content">
+
+      <!-- Top bar -->
+      <div class="top-bar">
+        <div class="page-title">🐙 GitHub</div>
+        <div class="icon-btn">⚙</div>
+      </div>
+
+      <!-- Connected account -->
+      <div class="connected-banner">
+        <div class="gh-avatar">👤</div>
+        <div>
+          <div class="gh-name">tatonka21</div>
+          <div class="gh-sub">github.com/tatonka21 · 14 repos</div>
+        </div>
+        <div class="connected-badge">● Connected</div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-val">14</div>
+          <div class="stat-label">Repos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">3</div>
+          <div class="stat-label">Open PRs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">7</div>
+          <div class="stat-label">Issues</div>
+        </div>
+      </div>
+
+      <!-- Linked repos -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Linked Repos</div>
+          <div class="section-link">+ Link repo</div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">📦</div>
+          <div>
+            <div class="repo-name">Technote</div>
+            <div class="repo-sub">Android app · main · Updated 2h ago</div>
+          </div>
+          <div class="repo-badge linked">Linked</div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">🔧</div>
+          <div>
+            <div class="repo-name">prompt-library</div>
+            <div class="repo-sub">Prompts & templates · Updated 1d ago</div>
+          </div>
+          <div class="repo-badge linked">Linked</div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">🌐</div>
+          <div>
+            <div class="repo-name">portfolio-site</div>
+            <div class="repo-sub">Next.js · Updated 5d ago</div>
+          </div>
+          <div class="repo-badge unlinked">Unlinked</div>
+        </div>
+      </div>
+
+      <!-- Recent activity -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Recent Activity</div>
+          <div class="section-link">View all</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon commit">💾</div>
+          <div>
+            <div class="activity-title">feat: add AgentCoordinator Mutex</div>
+            <div class="activity-sub">Technote · main · 2 files changed</div>
+            <div class="activity-time">37 min ago</div>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon pr">🔀</div>
+          <div>
+            <div class="activity-title">PR #12: Room schema v2</div>
+            <div class="activity-sub">Technote · 3 reviews · 2 comments</div>
+            <div class="activity-time">2h ago</div>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon issue">⚠️</div>
+          <div>
+            <div class="activity-title">Issue #8: Auth token refresh fails</div>
+            <div class="activity-sub">Technote · Open · assigned to you</div>
+            <div class="activity-time">Yesterday</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-nav">
+      <div class="pill-nav">Home</div>
+      <div class="pill-nav">Notes</div>
+      <div class="pill-nav active">GitHub</div>
+      <div class="pill-nav">Profile</div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot dot-active"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<div class="legend">
+  <p>🐙 GitHub account connected — repos, PRs, and issues in one view</p>
+  <p>🔗 Link repos to workspaces so notes auto-reference code changes</p>
+  <p>🤖 Iris can open issues, review PRs, and summarize commit diffs</p>
+  <p style="margin-top:8px">Previous: Page 6 → App Builder &nbsp;·&nbsp; Next: Page 8 → Settings & Profile</p>
+</div>
+
+</body>
+</html>

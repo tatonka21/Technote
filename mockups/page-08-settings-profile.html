@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technote – UI Mockups: Settings &amp; Profile</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0d14;
+    color: #E8EAF0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    text-align: center;
+    color: #9BA3B8;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .screen-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9BA3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .phone {
+    width: 360px;
+    height: 740px;
+    background: #1A1D27;
+    border-radius: 36px;
+    border: 2px solid #252836;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+  .status-bar {
+    height: 36px;
+    background: #0F1117;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 11px;
+    color: #9BA3B8;
+  }
+  .screen-content {
+    height: calc(100% - 36px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    background: linear-gradient(180deg, #0F1117 0%, #0D1520 55%, #0F1117 100%);
+    padding: 14px 16px 88px;
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+
+  /* Profile header */
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 0 18px;
+    gap: 8px;
+  }
+  .profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 8px 24px rgba(26,115,232,0.35);
+    position: relative;
+  }
+  .edit-avatar-btn {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+  }
+  .profile-name { font-size: 18px; font-weight: 800; color: #E8EAF0; }
+  .profile-email { font-size: 12px; color: #5C6480; }
+  .plan-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(26,115,232,0.22), rgba(0,188,212,0.15));
+    border: 1px solid rgba(26,115,232,0.35);
+    color: #90C2FF;
+    margin-top: 2px;
+  }
+
+  /* Settings group */
+  .settings-group { margin-bottom: 16px; }
+  .group-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #5C6480;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    padding-left: 2px;
+  }
+  .settings-card {
+    background: #1E2130;
+    border: 1px solid #2A2F42;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  /* Settings row */
+  .setting-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-bottom: 1px solid #252836;
+  }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .setting-icon.blue  { background: rgba(26,115,232,0.18); }
+  .setting-icon.cyan  { background: rgba(0,188,212,0.15); }
+  .setting-icon.purple{ background: rgba(139,92,246,0.18); }
+  .setting-icon.green { background: rgba(0,200,160,0.15); }
+  .setting-icon.yellow{ background: rgba(251,191,36,0.15); }
+  .setting-icon.red   { background: rgba(239,68,68,0.15); }
+  .setting-label { font-size: 13px; font-weight: 500; color: #E8EAF0; flex: 1; }
+  .setting-value { font-size: 12px; color: #5C6480; }
+  .setting-arrow { font-size: 12px; color: #3A3F52; }
+
+  /* Toggle */
+  .toggle {
+    width: 34px;
+    height: 20px;
+    border-radius: 10px;
+    background: #1A73E8;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+  }
+  .toggle.off {
+    background: #252836;
+    border: 1px solid #2A2F42;
+  }
+  .toggle.off::after { left: 3px; right: auto; }
+
+  /* Usage bar */
+  .usage-block {
+    padding: 11px 14px;
+    border-bottom: 1px solid #252836;
+  }
+  .usage-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .usage-label { font-size: 12px; color: #9BA3B8; }
+  .usage-count { font-size: 12px; font-weight: 700; color: #E8EAF0; }
+  .bar-track {
+    height: 5px;
+    background: #252836;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+  }
+
+  /* Danger zone */
+  .danger-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-bottom: 1px solid #252836;
+  }
+  .danger-row:last-child { border-bottom: none; }
+  .danger-label { font-size: 13px; font-weight: 500; color: #EF4444; flex: 1; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .pill-nav {
+    padding: 10px;
+    border-radius: 12px;
+    background: #252836;
+    border: 1px solid #2A2F42;
+    text-align: center;
+    font-size: 12px;
+    color: #9BA3B8;
+  }
+  .pill-nav.active { background: linear-gradient(135deg, #1A73E8, #00BCD4); color: white; border: none; }
+
+  /* Page dots */
+  .page-nav { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #252836; }
+  .dot-active { background: #1A73E8; width: 20px; border-radius: 4px; }
+
+  /* Legend */
+  .legend {
+    text-align: center;
+    margin-top: 32px;
+    color: #5C6480;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<h1>Technote — UI Mockups</h1>
+<p class="subtitle">Page 8: Settings &amp; Profile · API keys, preferences, theme &amp; account management</p>
+
+<div class="screen-wrapper">
+  <div class="screen-label">Settings &amp; Profile</div>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>📶 🔋</span>
+    </div>
+
+    <div class="screen-content">
+
+      <!-- Profile header -->
+      <div class="profile-header">
+        <div class="profile-avatar">
+          AT
+          <div class="edit-avatar-btn">✏</div>
+        </div>
+        <div class="profile-name">Alex Tatonka</div>
+        <div class="profile-email">alex@technote.app</div>
+        <div class="plan-badge">✨ Pro Plan</div>
+      </div>
+
+      <!-- AI & Agents group -->
+      <div class="settings-group">
+        <div class="group-label">AI &amp; Agents</div>
+        <div class="settings-card">
+          <!-- Usage bar -->
+          <div class="usage-block">
+            <div class="usage-header">
+              <span class="usage-label">Monthly AI usage</span>
+              <span class="usage-count">3,842 / 10,000 tokens</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:38%"></div>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon blue">🔑</div>
+            <div class="setting-label">OpenAI API Key</div>
+            <div class="setting-value">sk-••••4f2a</div>
+            <div class="setting-arrow">›</div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon cyan">🤖</div>
+            <div class="setting-label">Default Agent Model</div>
+            <div class="setting-value">GPT-4o</div>
+            <div class="setting-arrow">›</div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon purple">🧠</div>
+            <div class="setting-label">Auto-suggest notes</div>
+            <div class="toggle"></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon green">📎</div>
+            <div class="setting-label">Auto-link context</div>
+            <div class="toggle"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appearance group -->
+      <div class="settings-group">
+        <div class="group-label">Appearance</div>
+        <div class="settings-card">
+          <div class="setting-row">
+            <div class="setting-icon blue">🌙</div>
+            <div class="setting-label">Theme</div>
+            <div class="setting-value">Dark</div>
+            <div class="setting-arrow">›</div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon yellow">🔔</div>
+            <div class="setting-label">Notifications</div>
+            <div class="toggle"></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon cyan">📐</div>
+            <div class="setting-label">Editor font size</div>
+            <div class="setting-value">13 pt</div>
+            <div class="setting-arrow">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account & Danger group -->
+      <div class="settings-group">
+        <div class="group-label">Account</div>
+        <div class="settings-card">
+          <div class="setting-row">
+            <div class="setting-icon blue">🐙</div>
+            <div class="setting-label">GitHub Connection</div>
+            <div class="setting-value">tatonka21</div>
+            <div class="setting-arrow">›</div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-icon green">☁️</div>
+            <div class="setting-label">Sync &amp; Backup</div>
+            <div class="setting-value">On</div>
+            <div class="setting-arrow">›</div>
+          </div>
+          <div class="danger-row">
+            <div class="setting-icon red">🚪</div>
+            <div class="danger-label">Sign Out</div>
+            <div class="setting-arrow" style="color:#EF4444">›</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-nav">
+      <div class="pill-nav">Home</div>
+      <div class="pill-nav">Notes</div>
+      <div class="pill-nav">GitHub</div>
+      <div class="pill-nav active">Profile</div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot dot-active"></div>
+  </div>
+</div>
+
+<div class="legend">
+  <p>👤 Profile with plan badge and avatar editor</p>
+  <p>🔑 AI API key management and monthly token usage bar</p>
+  <p>🌙 Dark theme, font size, notifications and sync toggles</p>
+  <p style="margin-top:8px">Previous: Page 7 → GitHub Integration &nbsp;·&nbsp; End of mockup series</p>
+</div>
+
+</body>
+</html>
