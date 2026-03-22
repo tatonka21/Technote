@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technote – UI Mockups: GitHub Integration</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0d14;
+    color: #E8EAF0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    text-align: center;
+    color: #9BA3B8;
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+  .screens-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .screen-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9BA3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .phone {
+    width: 360px;
+    height: 740px;
+    background: #1A1D27;
+    border-radius: 36px;
+    border: 2px solid #252836;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .status-bar {
+    height: 36px;
+    background: #0F1117;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 11px;
+    color: #9BA3B8;
+  }
+  .screen-content {
+    overflow-y: auto;
+    height: calc(100% - 36px);
+    scrollbar-width: none;
+    background: linear-gradient(180deg, #0F1117 0%, #0D1520 50%, #0F1117 100%);
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+  .glow {
+    position: absolute;
+    top: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .glow-cyan { background: radial-gradient(ellipse, rgba(0,188,212,0.12) 0%, transparent 70%); }
+  .glow-green { background: radial-gradient(ellipse, rgba(0,200,83,0.10) 0%, transparent 70%); }
+  .content-padding { padding: 0 20px; position: relative; z-index: 1; }
+  .spacer-72 { height: 72px; }
+  .spacer-60 { height: 60px; }
+  .spacer-40 { height: 40px; }
+  .spacer-32 { height: 32px; }
+  .spacer-28 { height: 28px; }
+  .spacer-24 { height: 24px; }
+  .spacer-20 { height: 20px; }
+  .spacer-16 { height: 16px; }
+  .spacer-12 { height: 12px; }
+  .spacer-8  { height: 8px;  }
+
+  /* GitHub icon box */
+  .gh-icon {
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    background: #24292E;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+    font-size: 36px;
+  }
+  .app-title {
+    text-align: center; font-size: 24px; font-weight: 800;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .app-subtitle { text-align: center; font-size: 13px; color: #9BA3B8; }
+  .card { background: #1E2130; border-radius: 24px; padding: 20px; }
+  .card-title { font-size: 18px; font-weight: 700; color: #E8EAF0; }
+  .card-subtitle { font-size: 12px; color: #9BA3B8; margin-top: 4px; }
+
+  /* Auth option rows */
+  .auth-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #252836;
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+  }
+  .auth-option-icon { font-size: 22px; width: 28px; text-align: center; }
+  .auth-option-body { flex: 1; }
+  .auth-option-title { font-size: 14px; font-weight: 600; color: #E8EAF0; }
+  .auth-option-sub { font-size: 11px; color: #9BA3B8; margin-top: 2px; }
+  .auth-option-arrow { color: #5C6480; font-size: 18px; }
+  .auth-option.recommended { border: 1.5px solid #1A73E8; }
+  .badge-rec {
+    font-size: 9px; font-weight: 700; color: #1A73E8;
+    background: rgba(26,115,232,0.15);
+    border-radius: 20px; padding: 2px 7px;
+    display: inline-block; margin-top: 3px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* Device code card */
+  .code-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #252836;
+    border-radius: 16px;
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #1A73E8, #00BCD4) 1;
+    padding: 14px 20px;
+    margin: 0 auto;
+  }
+  .code-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1A73E8, #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+  }
+  .copy-btn {
+    background: none; border: none; cursor: pointer;
+    color: #9BA3B8; font-size: 16px;
+  }
+  .step-row { display: flex; align-items: center; gap: 10px; }
+  .step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(26,115,232,0.20);
+    color: #1A73E8;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-text { font-size: 12px; color: #9BA3B8; }
+  .step-text code {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #00BCD4;
+    background: rgba(0,188,212,0.12);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  .btn-primary {
+    width: 100%; background: #1A73E8; color: white; border: none;
+    border-radius: 14px; padding: 14px; font-size: 14px; font-weight: 600;
+    text-align: center;
+  }
+  .btn-ghost {
+    width: 100%; background: transparent; color: #5C6480; border: none;
+    border-radius: 14px; padding: 10px; font-size: 13px;
+    text-align: center;
+  }
+
+  /* Polling card */
+  .spinner-wrap { display: flex; justify-content: center; }
+  .spinner {
+    width: 52px; height: 52px;
+    border: 3px solid rgba(26,115,232,0.25);
+    border-top-color: #1A73E8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .poll-title { text-align: center; font-size: 16px; font-weight: 600; color: #E8EAF0; }
+  .poll-sub { text-align: center; font-size: 12px; color: #9BA3B8; }
+
+  /* Success card */
+  .success-icon { text-align: center; font-size: 56px; }
+  .success-title { text-align: center; font-size: 20px; font-weight: 700; color: #E8EAF0; }
+  .success-sub { text-align: center; font-size: 13px; color: #9BA3B8; }
+  .btn-success {
+    width: 100%; background: #00C853; color: white; border: none;
+    border-radius: 14px; padding: 14px; font-size: 14px; font-weight: 600;
+    text-align: center;
+  }
+
+  /* Termux note */
+  .termux-note {
+    background: rgba(0,188,212,0.08);
+    border: 1px solid rgba(0,188,212,0.25);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 11px;
+    color: #9BA3B8;
+    line-height: 1.6;
+  }
+  .termux-note strong { color: #00BCD4; }
+  .termux-note code {
+    font-family: 'Courier New', monospace;
+    font-size: 10.5px;
+    color: #00BCD4;
+    background: rgba(0,188,212,0.12);
+    border-radius: 4px;
+    padding: 1px 4px;
+  }
+
+  .home-indicator {
+    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;
+  }
+  .legend {
+    text-align: center; margin-top: 48px; color: #5C6480; font-size: 12px; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<h1>Technote — UI Mockups</h1>
+<p class="subtitle">Page 5: GitHub Integration · Device-flow OAuth (works in Termux &amp; headless terminals)</p>
+
+<div class="screens-container">
+
+  <!-- SCREEN 1: Connect -->
+  <div class="screen-wrapper">
+    <div class="screen-label">Connect Screen</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>📶 🔋</span>
+      </div>
+      <div class="screen-content">
+        <div class="glow glow-cyan"></div>
+        <div class="content-padding">
+          <div class="spacer-72"></div>
+          <div class="gh-icon">🐙</div>
+          <div class="spacer-20"></div>
+          <div class="app-title">Connect GitHub</div>
+          <div class="spacer-8"></div>
+          <div class="app-subtitle">Link your account to sync repos,<br>push notes, and run AI workflows</div>
+          <div class="spacer-40"></div>
+          <div class="card">
+            <div class="card-title">Choose how to connect</div>
+            <div class="card-subtitle">Works in all environments, including Termux</div>
+            <div class="spacer-20"></div>
+
+            <!-- Device flow (recommended) -->
+            <div class="auth-option recommended">
+              <div class="auth-option-icon">📱</div>
+              <div class="auth-option-body">
+                <div class="auth-option-title">Device code</div>
+                <div class="auth-option-sub">No browser needed · Works in Termux &amp; CI</div>
+                <span class="badge-rec">Recommended</span>
+              </div>
+              <div class="auth-option-arrow">›</div>
+            </div>
+            <div class="spacer-12"></div>
+
+            <!-- Browser OAuth -->
+            <div class="auth-option">
+              <div class="auth-option-icon">🌐</div>
+              <div class="auth-option-body">
+                <div class="auth-option-title">Browser OAuth</div>
+                <div class="auth-option-sub">Opens github.com in your browser</div>
+              </div>
+              <div class="auth-option-arrow">›</div>
+            </div>
+            <div class="spacer-12"></div>
+
+            <!-- Personal access token -->
+            <div class="auth-option">
+              <div class="auth-option-icon">🔑</div>
+              <div class="auth-option-body">
+                <div class="auth-option-title">Personal access token</div>
+                <div class="auth-option-sub">Paste a token from github.com/settings/tokens</div>
+              </div>
+              <div class="auth-option-arrow">›</div>
+            </div>
+          </div>
+          <div class="spacer-32"></div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Device code -->
+  <div class="screen-wrapper">
+    <div class="screen-label">Device Code Step</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>📶 🔋</span>
+      </div>
+      <div class="screen-content">
+        <div class="glow glow-cyan"></div>
+        <div class="content-padding">
+          <div class="spacer-60"></div>
+          <div class="gh-icon">🐙</div>
+          <div class="spacer-20"></div>
+          <div class="app-title">Activate on GitHub</div>
+          <div class="spacer-8"></div>
+          <div class="app-subtitle">Open <strong style="color:#00BCD4">github.com/login/device</strong><br>in any browser and enter the code below</div>
+          <div class="spacer-28"></div>
+
+          <!-- Code box -->
+          <div style="display:flex;justify-content:center;">
+            <div class="code-box">
+              <span class="code-text">ABCD-1234</span>
+              <button class="copy-btn">📋</button>
+            </div>
+          </div>
+          <div class="spacer-8"></div>
+          <div style="text-align:center;font-size:11px;color:#5C6480;">Tap 📋 to copy · Code expires in 15 min</div>
+
+          <div class="spacer-24"></div>
+
+          <!-- Steps -->
+          <div class="card">
+            <div class="step-row">
+              <div class="step-num">1</div>
+              <div class="step-text">Visit <code>github.com/login/device</code></div>
+            </div>
+            <div class="spacer-8"></div>
+            <div class="step-row">
+              <div class="step-num">2</div>
+              <div class="step-text">Enter the code shown above</div>
+            </div>
+            <div class="spacer-8"></div>
+            <div class="step-row">
+              <div class="step-num">3</div>
+              <div class="step-text">Approve the Technote app</div>
+            </div>
+            <div class="spacer-8"></div>
+            <div class="step-row">
+              <div class="step-num">4</div>
+              <div class="step-text">Tap the button below to continue</div>
+            </div>
+
+            <div class="spacer-20"></div>
+
+            <!-- Termux tip -->
+            <div class="termux-note">
+              <strong>🖥 Termux tip</strong><br>
+              In Termux, <code>gh auth login</code> may fail with
+              <em>"error connecting to browser"</em>.
+              Use <code>gh auth login --git-protocol https</code> — it shows the
+              same device code so you can complete auth from any browser.
+            </div>
+          </div>
+
+          <div class="spacer-20"></div>
+          <div class="btn-primary">I've entered the code</div>
+          <div class="spacer-12"></div>
+          <div class="btn-ghost">Back</div>
+          <div class="spacer-32"></div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Polling / waiting -->
+  <div class="screen-wrapper">
+    <div class="screen-label">Waiting for Authorization</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>📶 🔋</span>
+      </div>
+      <div class="screen-content">
+        <div class="glow glow-cyan"></div>
+        <div class="content-padding">
+          <div class="spacer-72"></div>
+          <div class="gh-icon">🐙</div>
+          <div class="spacer-20"></div>
+          <div class="app-title">Waiting…</div>
+          <div class="spacer-40"></div>
+          <div class="card">
+            <div class="spacer-8"></div>
+            <div class="spinner-wrap"><div class="spinner"></div></div>
+            <div class="spacer-24"></div>
+            <div class="poll-title">Waiting for authorization</div>
+            <div class="spacer-8"></div>
+            <div class="poll-sub">Complete the steps on<br><strong style="color:#00BCD4">github.com/login/device</strong>,<br>then return here</div>
+            <div class="spacer-24"></div>
+            <div class="btn-ghost">Cancel</div>
+            <div class="spacer-8"></div>
+          </div>
+          <div class="spacer-32"></div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: Success -->
+  <div class="screen-wrapper">
+    <div class="screen-label">Connected ✓</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>📶 🔋</span>
+      </div>
+      <div class="screen-content">
+        <div class="glow glow-green"></div>
+        <div class="content-padding">
+          <div class="spacer-72"></div>
+          <div class="success-icon">✅</div>
+          <div class="spacer-20"></div>
+          <div class="success-title">GitHub connected!</div>
+          <div class="spacer-8"></div>
+          <div class="success-sub">Your repositories, commits, and workflows<br>are now available in Technote</div>
+          <div class="spacer-40"></div>
+          <div class="card">
+            <!-- Connected account summary -->
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:40px;height:40px;border-radius:50%;background:#24292E;display:flex;align-items:center;justify-content:center;font-size:20px;">🐙</div>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:#E8EAF0;">github.com · tatonka21</div>
+                <div style="font-size:12px;color:#9BA3B8;">Scopes: repo, workflow, read:user</div>
+              </div>
+            </div>
+            <div class="spacer-16"></div>
+            <div style="height:1px;background:#252836;"></div>
+            <div class="spacer-16"></div>
+            <!-- Quick stats -->
+            <div style="display:flex;gap:12px;">
+              <div style="flex:1;background:#252836;border-radius:12px;padding:12px;text-align:center;">
+                <div style="font-size:20px;font-weight:700;color:#E8EAF0;">24</div>
+                <div style="font-size:11px;color:#9BA3B8;">Repos</div>
+              </div>
+              <div style="flex:1;background:#252836;border-radius:12px;padding:12px;text-align:center;">
+                <div style="font-size:20px;font-weight:700;color:#E8EAF0;">8</div>
+                <div style="font-size:11px;color:#9BA3B8;">Workflows</div>
+              </div>
+              <div style="flex:1;background:#252836;border-radius:12px;padding:12px;text-align:center;">
+                <div style="font-size:20px;font-weight:700;color:#1A73E8;">●</div>
+                <div style="font-size:11px;color:#9BA3B8;">Synced</div>
+              </div>
+            </div>
+            <div class="spacer-20"></div>
+            <div class="btn-success">Continue to Dashboard</div>
+          </div>
+          <div class="spacer-32"></div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <p>🐙 GitHub Device Authorization Grant (RFC 8628) · No browser required · Works in Termux, CI/CD, and headless Android</p>
+  <p style="margin-top:8px;">Termux fix: <code style="background:#1E2130;padding:2px 6px;border-radius:4px;font-size:11px;">gh auth login --git-protocol https</code> — uses device code instead of browser OAuth</p>
+  <p style="margin-top:8px;">Page 4 ← Note Detail &nbsp;|&nbsp; Page 6 → Knowledge Base</p>
+</div>
+
+</body>
+</html>
