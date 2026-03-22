@@ -5,3 +5,4 @@ Mockups:
 - Page 1 — Authentication (dark theme login / sign up)
 - Page 2 — Workspace dashboard (recent work + agent activity)
 - Page 3 — Multi-agent planner (agent-per-page build + approval flow)
+- Page 4 — Note detail + agent collaboration (inline agent chat, linked context & smart suggestions)
